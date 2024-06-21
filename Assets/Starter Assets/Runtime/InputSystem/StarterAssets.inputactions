@@ -42,9 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "a625a61f-104d-4592-b626-bc8509414479",
+                    "id": "d4076af5-2b92-4a76-aeca-c8d6c405f8b5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "e4ef96bd-e0d2-4788-a985-2c8484c9f697",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -230,12 +239,23 @@
                 },
                 {
                     "name": "",
-                    "id": "c9d55104-8d89-405b-b6ae-e4313054adc7",
-                    "path": "<Keyboard>/escape",
+                    "id": "6d18a902-210a-4fd5-9001-1e9e6ca8ae3d",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pause",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ddc788da-5927-4c0c-bfdf-7cc27fd8be12",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

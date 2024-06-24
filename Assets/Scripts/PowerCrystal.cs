@@ -1,27 +1,27 @@
 /*
  * Author: Muhammad Farhan
- * Date: 15/6/2024
- * Description: Script related to the collectible
+ * Date: 24/6/2024
+ * Description: Script related the player
  */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectible : Interactable
+public class PowerCrystal : Interactable
 {
     /// <summary>
-    /// collectible sound effect
+    /// sound when collected
     /// </summary>
     [SerializeField]
     private AudioClip collectAudio;
 
     /// <summary>
-    /// count for biofuel pieces
+    /// bool for whether player has crystal
     /// </summary>
-    public static int score = 1;
+    public bool hasCrystal;
 
     /// <summary>
-    /// to update player interactable
+    /// function for collecting crystal
     /// </summary>
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
@@ -33,17 +33,7 @@ public class Collectible : Interactable
     }
 
     /// <summary>
-    /// function for collecting biofuel
-    /// </summary>
-    /// <param name="thePlayer"></param>
-    public virtual void Collected(Player thePlayer)
-    {
-        AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
-        Debug.Log("Collected");
-    }
-
-    /// <summary>
-    /// to remove the collectible 
+    /// function to remove interactable
     /// </summary>
     /// <param name="collision"></param>
     private void OnCollisionExit(Collision collision)
@@ -54,17 +44,17 @@ public class Collectible : Interactable
         }
     }
 
-
     /// <summary>
-    /// function for interacting with collectible
+    /// function for interacting with the crystal
     /// </summary>
     /// <param name="thePlayer"></param>
     public override void Interact(Player thePlayer)
     {
         base.Interact(thePlayer);
-        GameManager.instance.IncreaseScore(score);
+        hasCrystal = true;
+        GameManager.instance.SetHasCrystal(hasCrystal);
         Destroy(gameObject);
-        Collected(thePlayer);
+        AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
+        Debug.Log("Collected");
     }
-
 }

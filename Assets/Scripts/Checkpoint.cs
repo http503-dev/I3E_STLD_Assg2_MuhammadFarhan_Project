@@ -16,44 +16,43 @@ public class Checkpoint : Interactable
     [SerializeField] private AudioClip collectAudio;
 
     /// <summary>
-    /// sets checkpoint for player script
+    /// updates interactable
     /// </summary>
-    /// <param name="other"></param>
-    private void OnTriggerEnter(Collider other)
+    /// <param name="collision"></param>
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            Player player = other.GetComponent<Player>();
-            if (player != null)
-            {
-                player.SetCheckpoint(transform.position);
-                Collected(player);
-            }
+            UpdatePlayerInteractable(collision.gameObject.GetComponent<Player>());
         }
     }
 
     /// <summary>
-    /// plays sound cue when checkpoint reached
+    /// removes interactable
     /// </summary>
-    /// <param name="thePlayer"></param>
-    private void Collected(Player thePlayer)
+    /// <param name="collision"></param>
+    private void OnCollisionExit(Collision collision)
     {
-        if (collectAudio != null)
+        if (collision.gameObject.tag == "Player")
         {
-            AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
+            RemovePlayerInteractable(collision.gameObject.GetComponent<Player>());
         }
-        Debug.Log("Checkpoint set at position: " + transform.position);
     }
 
     /// <summary>
-    /// interact from interacble script
+    /// sets checkpoint for player script and plays audio
     /// </summary>
     /// <param name="thePlayer"></param>
     public override void Interact(Player thePlayer)
     {
         base.Interact(thePlayer);
+        if (collectAudio != null)
+        {
+            AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
+        }
+        Debug.Log("Checkpoint set at position: " + transform.position);
         thePlayer.SetCheckpoint(transform.position);
-        Collected(thePlayer);
     }
+
 
 }

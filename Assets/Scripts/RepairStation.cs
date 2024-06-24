@@ -1,27 +1,16 @@
 /*
  * Author: Muhammad Farhan
- * Date: 15/6/2024
- * Description: Script related to the collectible
+ * Date: 24/6/2024
+ * Description: Script related the player
  */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectible : Interactable
+public class RepairStation : Interactable
 {
     /// <summary>
-    /// collectible sound effect
-    /// </summary>
-    [SerializeField]
-    private AudioClip collectAudio;
-
-    /// <summary>
-    /// count for biofuel pieces
-    /// </summary>
-    public static int score = 1;
-
-    /// <summary>
-    /// to update player interactable
+    /// function to update interactable
     /// </summary>
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
@@ -33,17 +22,7 @@ public class Collectible : Interactable
     }
 
     /// <summary>
-    /// function for collecting biofuel
-    /// </summary>
-    /// <param name="thePlayer"></param>
-    public virtual void Collected(Player thePlayer)
-    {
-        AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
-        Debug.Log("Collected");
-    }
-
-    /// <summary>
-    /// to remove the collectible 
+    /// function for removing interactable
     /// </summary>
     /// <param name="collision"></param>
     private void OnCollisionExit(Collision collision)
@@ -54,17 +33,20 @@ public class Collectible : Interactable
         }
     }
 
-
     /// <summary>
-    /// function for interacting with collectible
+    /// function for interacting with the repair station
     /// </summary>
     /// <param name="thePlayer"></param>
     public override void Interact(Player thePlayer)
     {
         base.Interact(thePlayer);
-        GameManager.instance.IncreaseScore(score);
-        Destroy(gameObject);
-        Collected(thePlayer);
+        if (GameManager.instance.HasCrystal() && GameManager.instance.GetScore() >= 2)
+        {
+            Debug.Log("You have successfully made the engine. Time to leave");
+        }
+        else
+        {
+            Debug.Log("You don't have all the items");
+        }
     }
-
 }

@@ -1,6 +1,6 @@
 /*
  * Author: Muhammad Farhan
- * Date: 16/6/2024
+ * Date: 18/6/2024
  * Description: Script related the player
  */
 using System.Collections;
@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using StarterAssets;
 
 public class Player : MonoBehaviour
 {
@@ -135,6 +136,7 @@ public class Player : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        GetComponent<FirstPersonController>().enabled = false;
         Debug.Log("Player has died.");
     }
 
@@ -146,36 +148,7 @@ public class Player : MonoBehaviour
         // Log respawn attempt
         Debug.Log("Respawn called. Moving player to last checkpoint: " + lastCheckpoint);
 
-        // Reset player position and Rigidbody physics
         transform.position = lastCheckpoint;
-        Debug.Log("Transform position set to: " + transform.position);
-
-        Rigidbody rb = GetComponent<Rigidbody>();
-
-        if (rb != null)
-        {
-            // Temporarily remove constraints to allow movement
-            rb.constraints = RigidbodyConstraints.None;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-
-            // Set Rigidbody position and sync transform
-            rb.position = lastCheckpoint;
-            Debug.Log("Rigidbody position set to: " + rb.position);
-
-            rb.MovePosition(lastCheckpoint);
-            Debug.Log("Sync transform position with Rigidbody: " + transform.position);
-
-            // Restore constraints
-            rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-        }
-
-        // Ensure the player camera moves with the player
-        if (playerCamera != null)
-        {
-            playerCamera.position = transform.position + new Vector3(0, 1.6f, 0); // Adjust the offset as needed
-            Debug.Log("Camera moved to: " + playerCamera.position);
-        }
 
         currentHealth = maxHealth;
         UpdateHealthUI();
@@ -184,6 +157,7 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
         Cursor.visible = false; // Hide the cursor
         Debug.Log("Respawned at: " + lastCheckpoint);
+        GetComponent<FirstPersonController>().enabled = true;
     }
 
     /// <summary>

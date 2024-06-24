@@ -21,8 +21,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private int currentScore = 0;
 
+    /// <summary>
+    /// indicate whether player has crystal
+    /// </summary>
     public bool hasCrystal = false;
 
+    /// <summary>
+    /// indicates whether player has pickaxe
+    /// </summary>
     public bool hasPick = false;
 
     /// <summary>

@@ -16,30 +16,6 @@ public class Checkpoint : Interactable
     [SerializeField] private AudioClip collectAudio;
 
     /// <summary>
-    /// updates interactable
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            UpdatePlayerInteractable(collision.gameObject.GetComponent<Player>());
-        }
-    }
-
-    /// <summary>
-    /// removes interactable
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            RemovePlayerInteractable(collision.gameObject.GetComponent<Player>());
-        }
-    }
-
-    /// <summary>
     /// sets checkpoint for player script and plays audio
     /// </summary>
     /// <param name="thePlayer"></param>

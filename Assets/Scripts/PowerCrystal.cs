@@ -21,30 +21,6 @@ public class PowerCrystal : Interactable
     public bool hasCrystal;
 
     /// <summary>
-    /// function for collecting crystal
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            UpdatePlayerInteractable(collision.gameObject.GetComponent<Player>());
-        }
-    }
-
-    /// <summary>
-    /// function to remove interactable
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            RemovePlayerInteractable(collision.gameObject.GetComponent<Player>());
-        }
-    }
-
-    /// <summary>
     /// function for interacting with the crystal
     /// </summary>
     /// <param name="thePlayer"></param>

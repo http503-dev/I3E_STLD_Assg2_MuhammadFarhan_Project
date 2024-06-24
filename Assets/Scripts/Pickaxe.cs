@@ -10,10 +10,6 @@ using UnityEngine.ProBuilder.Shapes;
 
 public class Pickaxe : Interactable
 {
-    /// <summary>
-    /// The door that this key card unlocks
-    /// </summary>
-    public Boulders linkedBoulder;
 
     /// <summary>
     /// sound for picking up pickaxe
@@ -27,31 +23,6 @@ public class Pickaxe : Interactable
     bool hasPick = false;
 
     /// <summary>
-    /// function to collect pickaxe
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            UpdatePlayerInteractable(collision.gameObject.GetComponent<Player>());
-            linkedBoulder.SetPick(false);
-        }
-    }
-
-    /// <summary>
-    /// function to remove pickaxe
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            RemovePlayerInteractable(collision.gameObject.GetComponent<Player>());
-        }
-    }
-
-    /// <summary>
     /// function for what happens on intereacting
     /// </summary>
     /// <param name="thePlayer"></param>
@@ -63,15 +34,5 @@ public class Pickaxe : Interactable
         AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
         Debug.Log("Collected");
         Destroy(gameObject);
-    }
-
-    private void Start()
-    {
-        // Check if there is a linked boulder
-        if (linkedBoulder != null)
-        {
-            // destroy the boulder that is linked
-            linkedBoulder.SetPick(true);
-        }
     }
 }

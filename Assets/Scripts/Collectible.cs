@@ -21,18 +21,6 @@ public class Collectible : Interactable
     public static int score = 1;
 
     /// <summary>
-    /// to update player interactable
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            UpdatePlayerInteractable(collision.gameObject.GetComponent<Player>());
-        }
-    }
-
-    /// <summary>
     /// function for collecting biofuel
     /// </summary>
     /// <param name="thePlayer"></param>
@@ -41,19 +29,6 @@ public class Collectible : Interactable
         AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
         Debug.Log("Collected");
     }
-
-    /// <summary>
-    /// to remove the collectible 
-    /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            RemovePlayerInteractable(collision.gameObject.GetComponent<Player>());
-        }
-    }
-
 
     /// <summary>
     /// function for interacting with collectible

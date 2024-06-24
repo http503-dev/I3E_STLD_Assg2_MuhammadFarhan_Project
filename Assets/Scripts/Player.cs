@@ -28,34 +28,6 @@ public class Player : MonoBehaviour
     [SerializeField] float interactionDistance;
 
     /// <summary>
-    /// to update interactable
-    /// </summary>
-    /// <param name="newInteractable"></param>
-    public void UpdateInteractable(Interactable newInteractable)
-    {
-        currentInteractable = newInteractable;
-    }
-
-    /// <summary>
-    /// for hitting 'e' to interact
-    /// </summary>
-    void OnInteract()
-    {
-        if (currentInteractable != null)
-        {
-            currentInteractable.Interact(this);
-        }
-    }
-
-    /// <summary>
-    /// to draw raycast line
-    /// </summary>
-    void Update()
-    {
-        Debug.DrawLine(playerCamera.position, playerCamera.position + (playerCamera.forward * interactionDistance), Color.red);
-    }
-
-    /// <summary>
     /// players max health
     /// </summary>
     public float maxHealth = 100f;
@@ -79,6 +51,72 @@ public class Player : MonoBehaviour
     /// to access last checkpoint position
     /// </summary>
     public Vector3 lastCheckpoint;
+
+    /// <summary>
+    /// using raycast to detect interactable
+    /// </summary>
+    private void DetectInteractable()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, interactionDistance))
+        {
+            Interactable interactable = hit.collider.GetComponent<Interactable>();
+            if (interactable != null)
+            {
+                if (interactable != currentInteractable)
+                {
+                    if (currentInteractable != null)
+                    {
+                        currentInteractable.RemovePlayerInteractable(this);
+                    }
+                    currentInteractable = interactable;
+                    currentInteractable.UpdatePlayerInteractable(this);
+                }
+            }
+            else if (currentInteractable != null)
+            {
+                currentInteractable.RemovePlayerInteractable(this);
+                currentInteractable = null;
+            }
+        }
+        else if (currentInteractable != null)
+        {
+            currentInteractable.RemovePlayerInteractable(this);
+            currentInteractable = null;
+        }
+    }
+
+    /// <summary>
+    /// to update interactable
+    /// </summary>
+    /// <param name="newInteractable"></param>
+    public void UpdateInteractable(Interactable newInteractable)
+    {
+        currentInteractable = newInteractable;
+    }
+
+
+    /// <summary>
+    /// to draw raycast line
+    /// </summary>
+    void Update()
+    {
+        Debug.DrawLine(playerCamera.position, playerCamera.position + (playerCamera.forward * interactionDistance), Color.red);
+        DetectInteractable();
+    }
+
+
+    /// <summary>
+    /// for hitting 'e' to interact
+    /// </summary>
+    void OnInteract()
+    {
+        if (currentInteractable != null)
+        {
+            currentInteractable.Interact(this);
+        }
+    }
+
 
     /// <summary>
     /// to set health and checkpoint position when character first spawns
@@ -141,7 +179,7 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// respawn logic THAT DOES NOT WORK
+    /// respawn logic
     /// </summary>
     public void Respawn()
     {

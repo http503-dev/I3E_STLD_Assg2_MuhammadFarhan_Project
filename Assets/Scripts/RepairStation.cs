@@ -10,6 +10,17 @@ using UnityEngine;
 public class RepairStation : Interactable
 {
     /// <summary>
+    /// sound when collected
+    /// </summary>
+    [SerializeField]
+    private AudioClip collectAudio;
+
+    /// <summary>
+    /// bool for whether player has engine
+    /// </summary>
+    public bool hasEngine;
+
+    /// <summary>
     /// function for interacting with the repair station
     /// </summary>
     /// <param name="thePlayer"></param>
@@ -24,7 +35,10 @@ public class RepairStation : Interactable
 
         if (hasCrystal && currentScore >= 2)
         {
-            Debug.Log("You have successfully made the engine. Time to leave");
+            hasCrystal = true;
+            GameManager.instance.SetHasEngine(hasEngine);
+            AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
+            Debug.Log("Collected");
         }
         else
         {

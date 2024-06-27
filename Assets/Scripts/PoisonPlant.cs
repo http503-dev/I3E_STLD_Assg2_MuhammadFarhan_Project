@@ -23,7 +23,15 @@ public class PoisonPlant : MonoBehaviour
     /// <summary>
     /// the player's health from the player script
     /// </summary>
-    public Player playerHealth;
+    public GameManager gameManager;
+
+    /// <summary>
+    /// to access GameManager instance
+    /// </summary>
+    private void Start()
+    {
+        gameManager = GameManager.instance;
+    }
 
     /// <summary>
     /// plant damages player when in trigger
@@ -34,10 +42,10 @@ public class PoisonPlant : MonoBehaviour
         if (other.tag == "Player")
         {
             playerInPoisonZone = true;
-            playerHealth = other.GetComponent<Player>();
-            if (playerHealth != null)
+            if (gameManager != null)
             {
                 InvokeRepeating("ApplyPoisonDamage", 0f, 1f / poisonRate);
+                Debug.Log("You are taking damage!");
             }
         }
     }
@@ -51,7 +59,7 @@ public class PoisonPlant : MonoBehaviour
         if (other.tag == "Player")
         {
             playerInPoisonZone = false;
-            if (playerHealth != null)
+            if (gameManager != null)
             {
                 CancelInvoke("ApplyPoisonDamage");
             }
@@ -63,9 +71,9 @@ public class PoisonPlant : MonoBehaviour
     /// </summary>
     void ApplyPoisonDamage()
     {
-        if (playerInPoisonZone && playerHealth != null)
+        if (playerInPoisonZone && gameManager != null)
         {
-            playerHealth.TakeDamage(poisonDamage * poisonRate);
+            gameManager.TakeDamage(poisonDamage * poisonRate);
         }
     }
 }

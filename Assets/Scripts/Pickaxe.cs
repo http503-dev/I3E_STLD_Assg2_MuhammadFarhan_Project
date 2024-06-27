@@ -33,6 +33,7 @@ public class Pickaxe : Interactable
         GameManager.instance.SetHasPick(hasPick);
         AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
         Debug.Log("Collected");
+        thePlayer.pickaxePrefab.SetActive(true);
         Destroy(gameObject);
     }
 }

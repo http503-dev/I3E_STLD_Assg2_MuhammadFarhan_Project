@@ -24,10 +24,10 @@ public class Checkpoint : Interactable
         base.Interact(thePlayer);
         if (collectAudio != null)
         {
-            AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
+            AudioManager.instance.PlaySFX(collectAudio, transform.position);
         }
         Debug.Log("Checkpoint set at position: " + transform.position);
-        thePlayer.SetCheckpoint(transform.position);
+        GameManager.SetCheckpoint(transform.position);
     }
 
 

@@ -30,15 +30,19 @@ public class RepairStation : Interactable
 
         bool hasCrystal = GameManager.instance.HasCrystal();
         int currentScore = GameManager.instance.GetScore();
+        int scrapCount = GameManager.instance.GetScrap();
 
-        Debug.Log($"RepairStation Interact - HasCrystal: {hasCrystal}, CurrentScore: {currentScore}");
+        Debug.Log($"RepairStation Interact - HasCrystal: {hasCrystal}, CurrentScore: {currentScore}, Scrap: {scrapCount}");
 
-        if (hasCrystal && currentScore >= 2)
+        if (hasCrystal && currentScore >= 2 && scrapCount >= 2)
         {
-            hasCrystal = true;
+            hasEngine = true;
             GameManager.instance.SetHasEngine(hasEngine);
-            AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
-            Debug.Log("Collected");
+            if (collectAudio != null)
+            {
+                AudioManager.instance.PlaySFX(collectAudio, transform.position);
+            }
+            Debug.Log("You have made the engine! Time to leave!");
         }
         else
         {

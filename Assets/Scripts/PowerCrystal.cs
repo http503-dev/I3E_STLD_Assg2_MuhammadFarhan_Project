@@ -30,7 +30,10 @@ public class PowerCrystal : Interactable
         hasCrystal = true;
         GameManager.instance.SetHasCrystal(hasCrystal);
         Destroy(gameObject);
-        AudioSource.PlayClipAtPoint(collectAudio, transform.position, 0.5f);
+        if (collectAudio != null)
+        {
+            AudioManager.instance.PlaySFX(collectAudio, transform.position);
+        }
         Debug.Log("Collected");
     }
 }

@@ -1,42 +1,38 @@
 /*
  * Author: Muhammad Farhan
- * Date: 23/6/2024
- * Description: Script related the player
+ * Date:28/6/2024
+ * Description: Script related to the scraps collectible
  */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.ProBuilder.Shapes;
 
-public class Pickaxe : Interactable
+public class ScrapCollectible : Interactable
 {
-
     /// <summary>
-    /// sound for picking up pickaxe
+    /// collectible sound effect
     /// </summary>
     [SerializeField]
     private AudioClip collectAudio;
 
     /// <summary>
-    /// bool to determine whether pickaxe has been collected
+    /// count for biofuel pieces
     /// </summary>
-    bool hasPick = false;
+    public static int scraps = 1;
 
     /// <summary>
-    /// function for what happens on intereacting
+    /// function for interacting with collectible
     /// </summary>
     /// <param name="thePlayer"></param>
     public override void Interact(Player thePlayer)
     {
         base.Interact(thePlayer);
-        hasPick = true;
-        GameManager.instance.SetHasPick(hasPick);
-        Debug.Log("Collected");
-        thePlayer.pickaxePrefab.SetActive(true);
+        GameManager.instance.IncreaseScrap(scraps);
         Destroy(gameObject);
         if (collectAudio != null)
         {
             AudioManager.instance.PlaySFX(collectAudio, transform.position);
         }
+        Debug.Log("Collected");
     }
 }

@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     /// indicates player's score and whether they have obtained the crystal and pickaxe
     /// </summary>
     private int currentScore = 0;
+    private int scrapCount = 0;
     public bool hasCrystal = false;
     public bool hasPick = false;
     public bool hasEngine = false;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     /// ui stuff
     /// </summary>
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI scrapText;
     public Slider healthSlider;
     public GameObject deathScreenUI;
 
@@ -231,6 +233,21 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// function for scrap count
+    /// </summary>
+    /// <param name="scrapAdded"></param>
+    public void IncreaseScrap(int scrapAdded)
+    {
+        scrapCount += scrapAdded;
+        scrapText.text = scrapCount.ToString();
+        Debug.Log(currentScore);
+        if (currentScore == 2) // checks if player has collected all biofuel
+        {
+            Debug.Log("You have collected all the biofuel needed!");
+        }
+    }
+
+    /// <summary>
     /// function to determine if player has pickaxe
     /// </summary>
     /// <param name="pickValue"></param>
@@ -279,12 +296,21 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// function to return bool value of crystal
+    /// function to return number of biofuel pieces
     /// </summary>
     /// <returns></returns>
     public int GetScore()
     {
         return currentScore;
+    }
+
+    /// <summary>
+    /// function to return number of scrap collected
+    /// </summary>
+    /// <returns></returns>
+    public int GetScrap()
+    {
+        return scrapCount;
     }
 
     /// <summary>

@@ -44,9 +44,12 @@ public class Boulders : Interactable
     {
         if (!destroyed)
         {
-            AudioSource.PlayClipAtPoint(destroyAudio, transform.position, 0.5f);
             Destroy(gameObject);
             destroyed = true;
+            if (destroyAudio != null)
+            {
+                AudioManager.instance.PlaySFX(destroyAudio, transform.position);
+            }
         }
     }
 }

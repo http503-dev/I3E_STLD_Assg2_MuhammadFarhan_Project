@@ -26,8 +26,6 @@ public class PoisonPlant : MonoBehaviour
     /// </summary>
     public GameManager gameManager;
 
-    public GameObject gasPanel;
-
     /// <summary>
     /// to access GameManager instance
     /// </summary>
@@ -48,7 +46,6 @@ public class PoisonPlant : MonoBehaviour
             if (gameManager != null)
             {
                 InvokeRepeating("ApplyPoisonDamage", 0f, 1f / poisonRate);
-                Debug.Log("You are taking damage!");
             }
         }
     }
@@ -65,7 +62,7 @@ public class PoisonPlant : MonoBehaviour
             if (gameManager != null)
             {
                 CancelInvoke("ApplyPoisonDamage");
-                gasPanel.SetActive(false); 
+                UIManager.instance.hideGas();
             }
         }
     }
@@ -82,7 +79,7 @@ public class PoisonPlant : MonoBehaviour
             if (hurtAudio != null)
             {
                 AudioManager.instance.PlaySFX(hurtAudio, transform.position);
-                gasPanel.SetActive(true);
+                UIManager.instance.showGas();
             }
         }
     }

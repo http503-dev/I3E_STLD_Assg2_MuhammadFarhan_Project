@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     /// to get checkpoint positions
     /// </summary>
     public Vector3 lastCheckpoint;
+    public Vector3 initialSpawn;
 
     /// <summary>
     /// indicates player's score and whether they have obtained the crystal and pickaxe
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI scrapText;
+    public TextMeshProUGUI inventoryText;
     public Slider healthSlider;
     public GameObject deathScreenUI;
 
@@ -141,7 +143,6 @@ public class GameManager : MonoBehaviour
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
-        Debug.Log($"{amount} damage taken. Current health: {currentHealth}");
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -161,7 +162,6 @@ public class GameManager : MonoBehaviour
             instance.lastCheckpoint = checkpointPosition;
             instance.currentHealth = instance.maxHealth;
             instance.UpdateHealthUI();
-            Debug.Log("Checkpoint set at: " + instance.lastCheckpoint);
         }
     }
 
@@ -170,9 +170,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Respawn()
     {
-        // Log respawn attempt
-        Debug.Log("Respawn called. Moving player to last checkpoint: " + lastCheckpoint);
-
         if (player != null)
         {
             player.transform.position = lastCheckpoint;
@@ -183,7 +180,6 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f; // Resume the game
             Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
             Cursor.visible = false; // Hide the cursor
-            Debug.Log("Respawned at: " + lastCheckpoint);
             player.GetComponent<FirstPersonController>().enabled = true;
         }
     }
@@ -200,7 +196,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Debug.Log("Player has died.");
 
         if(player != null)
         {
@@ -231,7 +226,8 @@ public class GameManager : MonoBehaviour
         hasPick = false;
         hasCrystal = false;
         hasEngine = false;
-        lastCheckpoint = Vector3.zero;
+        lastCheckpoint = initialSpawn;
+        player.transform.position = initialSpawn;
         UpdateHealthUI();
     }
 
@@ -243,12 +239,7 @@ public class GameManager : MonoBehaviour
     public void IncreaseScore(int scoreAdded)
     {
         currentScore += scoreAdded;
-        scoreText.text = currentScore.ToString();
-        Debug.Log(currentScore);
-        if (currentScore == 2) // checks if player has collected all biofuel
-        {
-            Debug.Log("You have collected all the biofuel needed!");    
-        }
+        scoreText.text = "Biofuel Components: " + currentScore.ToString() + "/5";
     }
 
     /// <summary>
@@ -258,12 +249,7 @@ public class GameManager : MonoBehaviour
     public void IncreaseScrap(int scrapAdded)
     {
         scrapCount += scrapAdded;
-        scrapText.text = scrapCount.ToString();
-        Debug.Log(currentScore);
-        if (currentScore == 2) // checks if player has collected all biofuel
-        {
-            Debug.Log("You have collected all the biofuel needed!");
-        }
+        scrapText.text = "Scrap Pieces: " + scrapCount.ToString() + "/5";
     }
 
     /// <summary>
@@ -273,7 +259,7 @@ public class GameManager : MonoBehaviour
     public void SetHasPick(bool pickValue) 
     {
         hasPick = pickValue;
-        Debug.Log("You have collected the pickaxe");
+        inventoryText.text += " Pickaxe,"; 
     }
 
     /// <summary>
@@ -283,7 +269,7 @@ public class GameManager : MonoBehaviour
     public void SetHasCrystal(bool value)
     {
         hasCrystal = value;
-        Debug.Log("You have collected the crystal");
+        inventoryText.text += " Crystal";
     }
 
     /// <summary>
@@ -293,7 +279,9 @@ public class GameManager : MonoBehaviour
     public void SetHasEngine(bool engineValue)
     {
         hasEngine = engineValue;
-        Debug.Log("You have collected the crystal");
+        scoreText.text = "Time to escape";
+        scrapText.text = null;
+        inventoryText.text = "Inventory: Pickaxe, Engine";
     }
 
     /// <summary>

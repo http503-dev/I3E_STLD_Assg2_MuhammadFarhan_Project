@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
     public GameObject warningBackground;
     public TextMeshProUGUI successPrompt;
     public GameObject successBackground;
+    public GameObject gasPanel;
+    public GameObject electricPanel;
 
     private void Awake()
     {
@@ -47,6 +49,7 @@ public class UIManager : MonoBehaviour
         interactPrompt.text = message;
         interactBackground.SetActive(true);
     }
+
     /// <summary>
     /// function to hide interact prompts
     /// </summary>
@@ -56,10 +59,23 @@ public class UIManager : MonoBehaviour
         interactBackground.SetActive(false);
     }
 
+    /// <summary>
+    /// function to show success prompts
+    /// </summary>
+    /// <param name="message"></param>
     public void ShowSuccessPrompt(string message)
     {
         successPrompt.text = message;
         successBackground.SetActive(true);
+    }
+
+    /// <summary>
+    /// function to hide success prompts
+    /// </summary>
+    public void HideSuccessPrompt()
+    {
+        successPrompt.text = null;
+        successBackground.SetActive(false);
     }
 
     /// <summary>
@@ -81,9 +97,35 @@ public class UIManager : MonoBehaviour
         warningBackground.SetActive(false);
     }
 
-    public void HideSuccessPrompt()
+    /// <summary>
+    /// function to show gas panel
+    /// </summary>
+    public void showGas()
     {
-        successPrompt.text = null;
-        successBackground.SetActive(false);
+        gasPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// function to hide gas panel
+    /// </summary>
+    public void hideGas()
+    {
+        gasPanel.SetActive(false);
+    }
+
+    /// <summary>
+    /// function to show electric panel
+    /// </summary>
+    public void showElectric()
+    {
+        electricPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// function to hide electric panel
+    /// </summary>
+    public void hideElectric()
+    {
+        electricPanel.SetActive(false);
     }
 }

@@ -26,8 +26,6 @@ public class ElectricCrystal : MonoBehaviour
     /// </summary>
     public GameManager gameManager;
 
-    public GameObject electricPanel;
-
     /// <summary>
     /// to access GameManager instance
     /// </summary>
@@ -47,8 +45,7 @@ public class ElectricCrystal : MonoBehaviour
             playerInElectricZone = true;
             if (gameManager != null)
             {
-                InvokeRepeating("ApplyPoisonDamage", 0f, 1f / electricRate);
-                Debug.Log("You are taking damage!");
+                InvokeRepeating("ApplyElectricDamage", 0f, 1f / electricRate);
             }
         }
     }
@@ -64,8 +61,8 @@ public class ElectricCrystal : MonoBehaviour
             playerInElectricZone = false;
             if (gameManager != null)
             {
-                CancelInvoke("ApplyPoisonDamage");
-                electricPanel.SetActive(false);
+                CancelInvoke("ApplyElectricDamage");
+                UIManager.instance.hideElectric();
             }
         }
     }
@@ -73,7 +70,7 @@ public class ElectricCrystal : MonoBehaviour
     /// <summary>
     /// damage is applied to player
     /// </summary>
-    void ApplyPoisonDamage()
+    void ApplyElectricDamage()
     {
         if (playerInElectricZone && gameManager != null)
         {
@@ -82,7 +79,7 @@ public class ElectricCrystal : MonoBehaviour
             if (hurtAudio != null)
             {
                 AudioManager.instance.PlaySFX(hurtAudio, transform.position);
-                electricPanel.SetActive(true);
+                UIManager.instance.showElectric();
             }
         }
     }

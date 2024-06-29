@@ -32,7 +32,7 @@ public class RepairStation : Interactable
         int currentScore = GameManager.instance.GetScore();
         int scrapCount = GameManager.instance.GetScrap();
 
-        if (hasCrystal && currentScore >= 2 && scrapCount >= 2)
+        if (hasCrystal && currentScore >= 5 && scrapCount >= 5)
         {
             hasEngine = true;
             GameManager.instance.SetHasEngine(hasEngine);

@@ -29,6 +29,11 @@ public class Player : MonoBehaviour
     /// </summary>
     [SerializeField] float interactionDistance;
 
+    private void Start()
+    {
+        GameManager.instance.initialSpawn = transform.position;
+    }
+
     /// <summary>
     /// using raycast to detect interactable
     /// </summary>

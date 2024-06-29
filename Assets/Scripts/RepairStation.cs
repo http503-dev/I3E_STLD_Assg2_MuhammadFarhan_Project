@@ -32,8 +32,6 @@ public class RepairStation : Interactable
         int currentScore = GameManager.instance.GetScore();
         int scrapCount = GameManager.instance.GetScrap();
 
-        Debug.Log($"RepairStation Interact - HasCrystal: {hasCrystal}, CurrentScore: {currentScore}, Scrap: {scrapCount}");
-
         if (hasCrystal && currentScore >= 2 && scrapCount >= 2)
         {
             hasEngine = true;
@@ -42,11 +40,27 @@ public class RepairStation : Interactable
             {
                 AudioManager.instance.PlaySFX(collectAudio, transform.position);
             }
-            Debug.Log("You have made the engine! Time to leave!");
+            UIManager.instance.ShowSuccessPrompt("Engine made. Time to leave!");
         }
         else
         {
-            Debug.Log("You don't have all the items");
+            UIManager.instance.ShowWarningPrompt("You have not collected all the required parts!");
         }
+    }
+
+    /// <summary>
+    /// trigger enter/exit to show/hide prompts
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
+    {
+        UIManager.instance.ShowInteractPrompt("Hit 'E' to interact");
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        UIManager.instance.HideInteractPrompt();
+        UIManager.instance.HideWarningPrompt();
+        UIManager.instance.HideSuccessPrompt();
     }
 }

@@ -1,32 +1,32 @@
 /*
  * Author: Muhammad Farhan
- * Date: 16/6/2024
- * Description: Script related the poison plants
+ * Date: 29/6/2024
+ * Description: Script related the electric crystals
  */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoisonPlant : MonoBehaviour
+public class ElectricCrystal : MonoBehaviour
 {
     [SerializeField] private AudioClip hurtAudio;
     /// <summary>
     /// How much damage it does
     /// </summary>
-    public float poisonDamage = 10f;
+    public float electricDamage = 20f;
 
     /// <summary>
     /// damage dealt per second
     /// </summary>
-    public float poisonRate = 1f;
-    private bool playerInPoisonZone = false;
+    public float electricRate = 1f;
+    private bool playerInElectricZone = false;
 
     /// <summary>
     /// the player's health from the player script
     /// </summary>
     public GameManager gameManager;
 
-    public GameObject gasPanel;
+    public GameObject electricPanel;
 
     /// <summary>
     /// to access GameManager instance
@@ -44,10 +44,10 @@ public class PoisonPlant : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            playerInPoisonZone = true;
+            playerInElectricZone = true;
             if (gameManager != null)
             {
-                InvokeRepeating("ApplyPoisonDamage", 0f, 1f / poisonRate);
+                InvokeRepeating("ApplyPoisonDamage", 0f, 1f / electricRate);
                 Debug.Log("You are taking damage!");
             }
         }
@@ -61,11 +61,11 @@ public class PoisonPlant : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            playerInPoisonZone = false;
+            playerInElectricZone = false;
             if (gameManager != null)
             {
                 CancelInvoke("ApplyPoisonDamage");
-                gasPanel.SetActive(false); 
+                electricPanel.SetActive(false);
             }
         }
     }
@@ -75,14 +75,14 @@ public class PoisonPlant : MonoBehaviour
     /// </summary>
     void ApplyPoisonDamage()
     {
-        if (playerInPoisonZone && gameManager != null)
+        if (playerInElectricZone && gameManager != null)
         {
-            gameManager.TakeDamage(poisonDamage * poisonRate);
+            gameManager.TakeDamage(electricDamage * electricRate);
 
             if (hurtAudio != null)
             {
                 AudioManager.instance.PlaySFX(hurtAudio, transform.position);
-                gasPanel.SetActive(true);
+                electricPanel.SetActive(true);
             }
         }
     }

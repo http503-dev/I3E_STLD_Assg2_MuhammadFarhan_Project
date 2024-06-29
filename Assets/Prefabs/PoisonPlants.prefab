@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a706e4342a98a499d6f6b65ed59172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtAudio: {fileID: 8300000, guid: c46d8a29d3243294fab7a334141ae98d, type: 3}
   poisonDamage: 10
   poisonRate: 1
-  playerHealth: {fileID: 0}
+  gameManager: {fileID: 0}

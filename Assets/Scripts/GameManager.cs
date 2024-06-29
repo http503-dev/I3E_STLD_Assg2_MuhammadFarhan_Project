@@ -159,6 +159,8 @@ public class GameManager : MonoBehaviour
         if (instance != null)
         {
             instance.lastCheckpoint = checkpointPosition;
+            instance.currentHealth = instance.maxHealth;
+            instance.UpdateHealthUI();
             Debug.Log("Checkpoint set at: " + instance.lastCheckpoint);
         }
     }
@@ -214,6 +216,23 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
         Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// function to reset game on restart
+    /// </summary>
+    public void ResetGameState()
+    {
+        currentHealth = maxHealth;
+        currentScore = 0;
+        scoreText.text = currentScore.ToString();
+        scrapCount = 0;
+        scrapText.text = scrapCount.ToString();
+        hasPick = false;
+        hasCrystal = false;
+        hasEngine = false;
+        lastCheckpoint = Vector3.zero;
+        UpdateHealthUI();
     }
 
 

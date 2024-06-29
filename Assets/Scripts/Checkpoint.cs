@@ -26,9 +26,22 @@ public class Checkpoint : Interactable
         {
             AudioManager.instance.PlaySFX(collectAudio, transform.position);
         }
-        Debug.Log("Checkpoint set at position: " + transform.position);
+        UIManager.instance.ShowSuccessPrompt("Checkpoint set. Health restored!");
         GameManager.SetCheckpoint(transform.position);
     }
 
+    /// <summary>
+    /// trigger enter/exit to show/hide prompts
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
+    {
+        UIManager.instance.ShowInteractPrompt("Hit 'E' to interact");
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        UIManager.instance.HideInteractPrompt();
+        UIManager.instance.HideSuccessPrompt();
+    }
 }

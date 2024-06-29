@@ -31,12 +31,25 @@ public class Pickaxe : Interactable
         base.Interact(thePlayer);
         hasPick = true;
         GameManager.instance.SetHasPick(hasPick);
-        Debug.Log("Collected");
-        thePlayer.pickaxePrefab.SetActive(true);
+        UIManager.instance.HideInteractPrompt();
         Destroy(gameObject);
         if (collectAudio != null)
         {
             AudioManager.instance.PlaySFX(collectAudio, transform.position);
         }
+    }
+
+    /// <summary>
+    /// trigger enter/exit to show/hide prompts
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
+    {
+        UIManager.instance.ShowInteractPrompt("Hit 'E' to interact");
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        UIManager.instance.HideInteractPrompt();
     }
 }

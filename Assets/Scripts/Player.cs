@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using StarterAssets;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class Player : MonoBehaviour
     /// </summary>
     Interactable currentInteractable;
 
-    public GameObject pickaxePrefab;
 
     /// <summary>
     /// to access player camera's transform position

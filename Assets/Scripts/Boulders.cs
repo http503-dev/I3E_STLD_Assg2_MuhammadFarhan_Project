@@ -5,6 +5,7 @@
  */
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Boulders : Interactable
@@ -30,12 +31,39 @@ public class Boulders : Interactable
         if (GameManager.instance.HasPick())
         {
             DestroyBoulder();
+
         }
-        else
+        UIManager.instance.HideInteractPrompt();
+    }
+
+    /// <summary>
+    /// trigger enter/exit to show/hide prompts
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
         {
-            Debug.Log("You need a pickaxe to destroy this boulder.");
+            bool hasPick = GameManager.instance.HasPick();
+
+            if (hasPick)
+            {
+                UIManager.instance.ShowInteractPrompt("Hit 'E' to interact");
+            }
+
+            else
+            {
+                UIManager.instance.ShowWarningPrompt("You need a tool to break these boulders!");
+            }
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        UIManager.instance.HideInteractPrompt();
+        UIManager.instance.HideWarningPrompt();
+    }
+
 
     /// <summary>
     /// Handles the destruction

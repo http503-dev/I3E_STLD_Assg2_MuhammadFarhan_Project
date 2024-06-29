@@ -33,6 +33,20 @@ public class ScrapCollectible : Interactable
         {
             AudioManager.instance.PlaySFX(collectAudio, transform.position);
         }
-        Debug.Log("Collected");
+        UIManager.instance.HideInteractPrompt();
+    }
+
+    /// <summary>
+    /// trigger enter/exit to show/hide prompts
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
+    {
+        UIManager.instance.ShowInteractPrompt("Hit 'E' to interact");
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        UIManager.instance.HideInteractPrompt();
     }
 }

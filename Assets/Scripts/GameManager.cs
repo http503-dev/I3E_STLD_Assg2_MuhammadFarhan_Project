@@ -176,11 +176,11 @@ public class GameManager : MonoBehaviour
         {
             if (lastCheckpoint != null)
             {
-                player.transform.position = initialSpawn;
+                player.transform.position = lastCheckpoint;
             }
             else
             {
-                player.transform.position = lastCheckpoint;
+                player.transform.position = initialSpawn;
             }
 
             currentHealth = maxHealth;
@@ -203,6 +203,8 @@ public class GameManager : MonoBehaviour
         {
             pauseMenuUI.SetActive(false);
             playerUI.SetActive(false);
+            UIManager.instance.HideGas();
+            UIManager.instance.HideElectric();
             deathScreenUI.SetActive(true);
         }
         Time.timeScale = 0f;

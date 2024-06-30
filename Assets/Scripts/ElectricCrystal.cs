@@ -62,7 +62,7 @@ public class ElectricCrystal : MonoBehaviour
             if (gameManager != null)
             {
                 CancelInvoke("ApplyElectricDamage");
-                UIManager.instance.hideElectric();
+                UIManager.instance.HideElectric();
             }
         }
     }
@@ -79,7 +79,7 @@ public class ElectricCrystal : MonoBehaviour
             if (hurtAudio != null)
             {
                 AudioManager.instance.PlaySFX(hurtAudio, transform.position);
-                UIManager.instance.showElectric();
+                UIManager.instance.ShowElectric();
             }
         }
     }

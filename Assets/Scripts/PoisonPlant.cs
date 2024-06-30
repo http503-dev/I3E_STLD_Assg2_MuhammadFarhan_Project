@@ -62,7 +62,7 @@ public class PoisonPlant : MonoBehaviour
             if (gameManager != null)
             {
                 CancelInvoke("ApplyPoisonDamage");
-                UIManager.instance.hideGas();
+                UIManager.instance.HideGas();
             }
         }
     }
@@ -79,7 +79,7 @@ public class PoisonPlant : MonoBehaviour
             if (hurtAudio != null)
             {
                 AudioManager.instance.PlaySFX(hurtAudio, transform.position);
-                UIManager.instance.showGas();
+                UIManager.instance.ShowGas();
             }
         }
     }

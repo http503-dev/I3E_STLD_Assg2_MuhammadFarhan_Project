@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     public GameObject successBackground;
     public GameObject gasPanel;
     public GameObject electricPanel;
+    public GameObject congrats;
 
     private void Awake()
     {
@@ -100,7 +101,7 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// function to show gas panel
     /// </summary>
-    public void showGas()
+    public void ShowGas()
     {
         gasPanel.SetActive(true);
     }
@@ -108,7 +109,7 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// function to hide gas panel
     /// </summary>
-    public void hideGas()
+    public void HideGas()
     {
         gasPanel.SetActive(false);
     }
@@ -116,7 +117,7 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// function to show electric panel
     /// </summary>
-    public void showElectric()
+    public void ShowElectric()
     {
         electricPanel.SetActive(true);
     }
@@ -124,8 +125,16 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// function to hide electric panel
     /// </summary>
-    public void hideElectric()
+    public void HideElectric()
     {
         electricPanel.SetActive(false);
+    }
+
+    /// <summary>
+    /// function to show congrats message
+    /// </summary>
+    public void ShowCongrats()
+    {
+        congrats.SetActive(true);
     }
 }

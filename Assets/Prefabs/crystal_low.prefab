@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 4556544660832932415}
   - component: {fileID: 618051632871595418}
   - component: {fileID: 3420261706456738128}
+  - component: {fileID: 611191941146876677}
+  - component: {fileID: 8693896906534319938}
+  - component: {fileID: 5255360087895022604}
   m_Layer: 0
   m_Name: crystal_low
   m_TagString: Untagged
@@ -26,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3780712061010839685}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 93.81022, y: 0.0382, z: 85.22957}
-  m_LocalScale: {x: 1.034434, y: 1.034434, z: 1.034434}
+  m_LocalRotation: {x: -0, y: 0.17417838, z: -0, w: 0.98471415}
+  m_LocalPosition: {x: 154.28, y: 1.69, z: 388.3}
+  m_LocalScale: {x: 60.08924, y: 60.08924, z: 60.08924}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 20.062, z: 0}
 --- !u!33 &618051632871595418
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -83,3 +86,60 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &611191941146876677
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3780712061010839685}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7377216969348009826, guid: 852c87c9c856eaa4593e4e290d8aed36, type: 3}
+--- !u!114 &8693896906534319938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3780712061010839685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce204a0edfc9110438c7292a22a3004a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectAudio: {fileID: 8300000, guid: cf53a8076bd7c474d9e4e9dac96e25b5, type: 3}
+  hasCrystal: 0
+--- !u!65 &5255360087895022604
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3780712061010839685}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.07438308, y: 0.0740299, z: 0.076562464}
+  m_Center: {x: -0.0006513878, y: 0.014516741, z: -0.0068743965}

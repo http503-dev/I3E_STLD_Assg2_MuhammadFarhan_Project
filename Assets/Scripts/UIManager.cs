@@ -137,4 +137,9 @@ public class UIManager : MonoBehaviour
     {
         congrats.SetActive(true);
     }
+
+    public void HideCongrats()
+    {
+        congrats.SetActive(false);
+    }
 }

@@ -95,6 +95,8 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(1);
         pauseMenuUI.SetActive(false);
         playerUI.SetActive(true);
+        UIManager.instance.HideCongrats();
+        UIManager.instance.HideSuccessPrompt();
     }
 
     /// <summary>

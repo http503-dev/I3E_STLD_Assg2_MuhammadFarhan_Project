@@ -13378,6 +13378,8 @@ MonoBehaviour:
   inventoryText: {fileID: 533959819}
   healthSlider: {fileID: 1972704495}
   deathScreenUI: {fileID: 183830067}
+  pauseMenuUI: {fileID: 1196721040}
+  playerUI: {fileID: 1196464224}
 --- !u!4 &1597826094
 Transform:
   m_ObjectHideFlags: 0
@@ -13393,8 +13395,8 @@ Transform:
   m_Children:
   - {fileID: 1757052260}
   - {fileID: 1528069697}
-  - {fileID: 153934921}
   - {fileID: 504722262}
+  - {fileID: 153934921}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1597826095

@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI inventoryText;
     public Slider healthSlider;
     public GameObject deathScreenUI;
+    public GameObject pauseMenuUI;
+    public GameObject playerUI;
 
     private void Awake()
     {
@@ -172,11 +174,19 @@ public class GameManager : MonoBehaviour
     {
         if (player != null)
         {
-            player.transform.position = lastCheckpoint;
+            if (lastCheckpoint != null)
+            {
+                player.transform.position = initialSpawn;
+            }
+            else
+            {
+                player.transform.position = lastCheckpoint;
+            }
 
             currentHealth = maxHealth;
             UpdateHealthUI();
             deathScreenUI.SetActive(false);
+            playerUI.SetActive(true);
             Time.timeScale = 1f; // Resume the game
             Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
             Cursor.visible = false; // Hide the cursor
@@ -191,6 +201,8 @@ public class GameManager : MonoBehaviour
     {
         if (deathScreenUI != null)
         {
+            pauseMenuUI.SetActive(false);
+            playerUI.SetActive(false);
             deathScreenUI.SetActive(true);
         }
         Time.timeScale = 0f;
@@ -220,12 +232,14 @@ public class GameManager : MonoBehaviour
     {
         currentHealth = maxHealth;
         currentScore = 0;
-        scoreText.text = currentScore.ToString();
+        scoreText.text = "Biofuel Components: " + currentScore.ToString() + "/5";
         scrapCount = 0;
-        scrapText.text = scrapCount.ToString();
+        scrapText.text = "Scrap Pieces: " + scrapCount.ToString() + "/5";
         hasPick = false;
         hasCrystal = false;
         hasEngine = false;
+        inventoryText.text = "Inventory: ";
+
         lastCheckpoint = initialSpawn;
         player.transform.position = initialSpawn;
         UpdateHealthUI();
@@ -259,7 +273,7 @@ public class GameManager : MonoBehaviour
     public void SetHasPick(bool pickValue) 
     {
         hasPick = pickValue;
-        inventoryText.text += " Pickaxe,"; 
+        inventoryText.text += " Pickaxe"; 
     }
 
     /// <summary>
@@ -269,7 +283,7 @@ public class GameManager : MonoBehaviour
     public void SetHasCrystal(bool value)
     {
         hasCrystal = value;
-        inventoryText.text += " Crystal";
+        inventoryText.text += ", Crystal";
     }
 
     /// <summary>
